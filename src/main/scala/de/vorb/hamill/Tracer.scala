@@ -1,72 +1,74 @@
 package de.vorb.hamill
 
 import java.io.IOException
-import java.nio.file.{
-  FileVisitOption => FVOption,
-  FileVisitResult => FVResult,
-  Files,
-  Path,
-  SimpleFileVisitor => SFV
-}
-import java.nio.file.attribute.{ BasicFileAttributes => BFA }
+import java.nio.file.{ FileVisitOption, FileVisitResult, FileVisitor, Files, Path }
+import java.nio.file.attribute.BasicFileAttributes
 import java.util.EnumSet
-import akka.actor.Actor
-import akka.actor.ActorRef
 
+import de.vorb.hamill.Configuration._
+
+import akka.actor.{ Actor, actorRef2Scala }
+
+/**
+ * Tracer actor. Provides the functionality behind [[Tracing.walkFileTree]].
+ */
 class Tracer extends Actor {
   import Tracer._
 
   def receive = {
-    case Start(path, fl, md, handler) => startWalking(path, fl, md, handler)
-  }
+    case Start(root, action, config) =>
 
-  /**
-   * Starts to recursively walk the file tree.
-   */
-  def startWalking(path: Path, followLinks: Boolean, maxDepth: Int,
-                   handler: ActorRef) {
-    val opts: EnumSet[FVOption] =
-      if (followLinks) EnumSet.of(FVOption.FOLLOW_LINKS)
-      else EnumSet.noneOf(classOf[FVOption])
+      val options = if (config.followLinks)
+        EnumSet.of(FileVisitOption.FOLLOW_LINKS)
+      else
+        EnumSet.noneOf(classOf[FileVisitOption])
 
-    Files.walkFileTree(path, opts, maxDepth, new SFV[Path] {
-      override def preVisitDirectory(dir: Path, attrs: BFA) = {
-        handler ! PreDirectory(dir, attrs)
-        FVResult.CONTINUE
-      }
+      Files.walkFileTree(root, options, config.maxDepth,
+        new FileVisitor[Path] {
+          override def preVisitDirectory(dir: Path,
+                                         attrs: BasicFileAttributes) = {
+            if (config.directories)
+              action(Directory(dir, attrs))
 
-      override def postVisitDirectory(dir: Path, exc: IOException) = {
-        if (exc == null) {
-          handler ! PostDirectory(dir)
-          FVResult.CONTINUE
-        } else {
-          handler ! PostDirectoryFailed(dir, exc)
-          FVResult.SKIP_SUBTREE
-        }
-      }
+            FileVisitResult.CONTINUE
+          }
 
-      override def visitFile(file: Path, attrs: BFA) = {
-        handler ! File(file, attrs)
-        FVResult.CONTINUE
-      }
+          override def postVisitDirectory(dir: Path, err: IOException) = {
+            if (err != null) {
+              // handle error according to configuration
+              if (config.directoryErrorBehavior == Configuration.Terminate)
+                sender ! Result(Some(err))
 
-      override def visitFileFailed(file: Path, exc: IOException) = {
-        handler ! FileFailed(file, exc)
-        FVResult.CONTINUE
-      }
-    })
+              config.directoryErrorBehavior
+            } else if (dir == root) {
+              sender ! Result(None)
+              FileVisitResult.TERMINATE
+            } else {
+              FileVisitResult.CONTINUE
+            }
+          }
+
+          override def visitFile(file: Path, attrs: BasicFileAttributes) = {
+            if (config.files)
+              action(de.vorb.hamill.File(file, Right(attrs)))
+
+            FileVisitResult.CONTINUE
+          }
+
+          override def visitFileFailed(file: Path, err: IOException) = {
+            if (config.fileErrorBehavior == Configuration.Terminate)
+              sender ! Result(Some(err))
+            else
+              action(de.vorb.hamill.File(file, Left(err)))
+
+            config.fileErrorBehavior
+          }
+        })
   }
 }
 
 object Tracer {
-  case class Start(path: Path, followLinks: Boolean, maxDepth: Int,
-      handler: ActorRef) {
-    require(maxDepth > 0)
-  }
-
-  case class File(file: Path, attrs: BFA)
-  case class FileFailed(file: Path, exc: IOException)
-  case class PreDirectory(dir: Path, attrs: BFA)
-  case class PostDirectory(dir: Path)
-  case class PostDirectoryFailed(dir: Path, exc: IOException)
+  case class Start(root: Path, action: PathContainer => Unit,
+                   config: Configuration)
+  case class Result(error: Option[IOException])
 }
