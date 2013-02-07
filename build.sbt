@@ -22,15 +22,18 @@ libraryDependencies += "org.scala-lang" % "scala-actors" % "2.10.0"
 libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.1.0"
 
 
-publishArtifact in Test := false
+// Publishing information
+publishMavenStyle := true
 
 publishTo <<= version { (version: String) =>
-  val repo = "/dev/web/repo.vorb.de/public/"
+  val nexus = "https://oss.sonatype.org/"
   if (version.trim.endsWith("SNAPSHOT"))
-    Some(Resolver.file("file", new File(repo + "snapshots")))
+    Some("snapshots" at nexus + "content/repositories/snapshots")
   else
-    Some(Resolver.file("file", new File(repo + "releases")))
+    Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
+
+publishArtifact in Test := false
 
 pomIncludeRepository := { _ => false }
 
@@ -44,7 +47,7 @@ pomExtra := (
       <id>pvorb</id>
       <name>Paul Vorbach</name>
       <email>paul@vorb.de</email>
-      <url>http://paul.vorba.ch</url>
+      <url>http://paul.vorba.ch/</url>
       <timezone>+1</timezone>
     </developer>
   </developers>)
