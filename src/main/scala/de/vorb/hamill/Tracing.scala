@@ -28,6 +28,11 @@ object Tracing {
       system.actorOf(Props[Tracer]) ? Tracer.StartAction(root, config, action)
     }
 
+  /**
+   * Walks a file tree recursively (depth-first) starting at `root` and sends
+   * either an [[de.vorb.hamill.Directory]] or an [[de.vorb.hamill.File]] to the
+   * specified listener actor for each directory/file passed.
+   */
   def walkFileTree(root: Path, listener: ActorRef, config: Configuration,
     timeout: Timeout)(implicit system: ActorSystem): Future[Any] =
     {

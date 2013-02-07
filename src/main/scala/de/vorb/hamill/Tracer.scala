@@ -4,9 +4,10 @@ import java.io.IOException
 import java.nio.file.{ FileVisitOption, FileVisitResult, FileVisitor, Files, Path }
 import java.nio.file.attribute.BasicFileAttributes
 import java.util.EnumSet
+
 import de.vorb.hamill.Configuration._
-import akka.actor.{ Actor, actorRef2Scala }
-import akka.actor.ActorRef
+
+import akka.actor.{ Actor, ActorRef, actorRef2Scala }
 
 /**
  * Tracer actor. Used in [[Tracing]]'s `walkFileTree` methods.
