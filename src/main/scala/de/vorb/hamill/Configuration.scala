@@ -1,27 +1,23 @@
 package de.vorb.hamill
 
 import java.nio.file.FileVisitResult
-import java.nio.file.FileVisitResult
 
 /**
  * Configuration object.
  */
 trait Configuration {
-  import Configuration.FileErrorBehavior
-  import Configuration.DirectoryErrorBehavior
-
   def hidden: Boolean
   def recursive: Boolean
   def files: Boolean
   def directories: Boolean
   def maxDepth: Int
   def followLinks: Boolean
-  def fileErrorBehavior: FileErrorBehavior
-  def directoryErrorBehavior: DirectoryErrorBehavior
+  def fileErrorBehavior: Configuration.FileErrorBehavior
+  def directoryErrorBehavior: Configuration.DirectoryErrorBehavior
 }
 
 object Configuration {
-  
+
   /**
    * Example Configuration.
    */
@@ -36,23 +32,46 @@ object Configuration {
     def directoryErrorBehavior = Terminate
   }
 
+  /**
+   * Specifies the behavior on file errors.
+   */
   sealed trait FileErrorBehavior
+
+  /**
+   * Specifies the behavior on directory errors.
+   */
   sealed trait DirectoryErrorBehavior
+
+  /**
+   * Terminates the tracer.
+   */
   case object Terminate extends FileErrorBehavior with DirectoryErrorBehavior
-  case object SkipSiblings extends FileErrorBehavior
+
+  /**
+   * Skips the subtree of a directory that cannot be read.
+   */
   case object SkipSubtree extends DirectoryErrorBehavior
+
+  /**
+   * Skips siblings that come after an error.
+   */
+  case object SkipSiblings extends FileErrorBehavior
+
+  /**
+   * Continues with the next file after a unreadable file.
+   */
   case object Continue extends FileErrorBehavior
 
-  implicit def fileErrorBehavior2FileVisitResult(b: FileErrorBehavior): FileVisitResult =
+  implicit def fileErrBehaviorConv(b: FileErrorBehavior): FileVisitResult =
     b match {
-      case Terminate => FileVisitResult.TERMINATE
+      case Terminate    => FileVisitResult.TERMINATE
       case SkipSiblings => FileVisitResult.SKIP_SIBLINGS
-      case Continue => FileVisitResult.CONTINUE
+      case Continue     => FileVisitResult.CONTINUE
     }
 
-  implicit def directoryErrorBehavior2FileVisitResult(b: DirectoryErrorBehavior): FileVisitResult =
+  implicit def dirErrBehaviorConv(b: DirectoryErrorBehavior): FileVisitResult =
     b match {
-      case Terminate => FileVisitResult.TERMINATE
+      case Terminate   => FileVisitResult.TERMINATE
       case SkipSubtree => FileVisitResult.SKIP_SUBTREE
     }
 }

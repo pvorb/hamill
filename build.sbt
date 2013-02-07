@@ -2,7 +2,7 @@ name := "hamill"
 
 organization := "de.vorb"
 
-version := "0.0.0"
+version := "0.1.0"
 
 scalaVersion := "2.10.0"
 
@@ -36,8 +36,8 @@ pomIncludeRepository := { _ => false }
 
 pomExtra := (
   <scm>
-    <url>git@github.com:pvorb/compvis.git</url>
-    <connection>scm:git:git@github.com:pvorb/compvis.git</connection>
+    <url>git@github.com:pvorb/hamill.git</url>
+    <connection>scm:git:git@github.com:pvorb/hamill.git</connection>
   </scm>
   <developers>
     <developer>

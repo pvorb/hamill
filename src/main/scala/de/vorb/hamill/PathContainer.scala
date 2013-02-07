@@ -6,10 +6,10 @@ import java.nio.file.attribute.BasicFileAttributes
 
 /**
  * Container for Path.
- * 
+ *
  * @see java.nio.file.Path
  */
-trait PathContainer
+sealed trait PathContainer
 
 /**
  * Holds a reference to a file as a path and either an IOException or the file's
