@@ -56,7 +56,7 @@ API
 
 See the [current Scaladoc API][api].
 
-[api]: https://repo.vorb.de/releases/de/vorb/hamill_2.10/api/current/
+[api]: http://pvorb.github.com/hamill/api/current/#de.vorb.hamill.package
 [Akka]: http://akka.io/
 
 License
