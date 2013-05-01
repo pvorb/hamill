@@ -4,6 +4,7 @@ import java.nio.file.Path
 
 import scala.concurrent.Future
 import scala.concurrent.duration.DurationInt
+import scala.language.postfixOps
 
 import akka.actor.{ ActorRef, ActorSystem, Props }
 import akka.pattern.ask

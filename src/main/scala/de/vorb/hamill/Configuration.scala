@@ -2,6 +2,8 @@ package de.vorb.hamill
 
 import java.nio.file.FileVisitResult
 
+import scala.language.implicitConversions
+
 /**
  * Configuration object.
  */
