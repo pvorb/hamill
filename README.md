@@ -34,7 +34,9 @@ object Example extends App {
 
   val root = FileSystems.getDefault().getPath("src", "")
 
-  val future = Tracing.walkFileTree(root, (path: PathContainer) => {
+  val tracing = new Tracing
+
+  val future = tracing.walkFileTree(root, (path: PathContainer) => {
     path match {
       case File(f, Left(err)) =>
         println("error in file " + f)
@@ -43,7 +45,7 @@ object Example extends App {
       case Directory(d, attrs) =>
         println(d + ", " + attrs)
     }
-  }, Configuration.Default, timeout)
+  }, timeout)
 
   Await.result(future, 5 minutes)
 }
