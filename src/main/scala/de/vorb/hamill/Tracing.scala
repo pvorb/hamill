@@ -6,14 +6,19 @@ import scala.concurrent.Future
 import scala.concurrent.duration.DurationInt
 import scala.language.postfixOps
 
-import akka.actor.{ ActorRef, ActorSystem, Props }
+import com.typesafe.config.{ Config, ConfigFactory }
+
+import akka.actor.{ActorRef, ActorSystem, Props}
 import akka.pattern.ask
 import akka.util.Timeout
 
 /**
  * Main component.
  */
-object Tracing {
+class Tracing(config: Config) {
+  val configuration = new Configuration(config)
+
+  def this() = this(ConfigFactory.load())
 
   /**
    * Walks a file tree recursively (depth-first) starting at `root` and applies
@@ -21,12 +26,11 @@ object Tracing {
    * configuration.
    */
   def walkFileTree(root: Path, action: PathContainer => Unit,
-    config: Configuration = Configuration.Default,
     timeout: Timeout = new Timeout(1 minute))(
       implicit system: ActorSystem): Future[Any] =
     {
       implicit val t = timeout
-      system.actorOf(Props[Tracer]) ? Tracer.StartAction(root, config, action)
+      system.actorOf(Props[Tracer]) ? Tracer.StartAction(root, configuration, action)
     }
 
   /**
@@ -34,11 +38,11 @@ object Tracing {
    * either an [[de.vorb.hamill.Directory]] or an [[de.vorb.hamill.File]] to the
    * specified listener actor for each directory/file passed.
    */
-  def walkFileTree(root: Path, listener: ActorRef, config: Configuration,
+  def walkFileTree(root: Path, listener: ActorRef,
     timeout: Timeout)(implicit system: ActorSystem): Future[Any] =
     {
       implicit val t = timeout
       system.actorOf(Props[Tracer]) ?
-        Tracer.StartListener(root, config, listener)
+        Tracer.StartListener(root, configuration, listener)
     }
 }

@@ -1,48 +1,52 @@
 package de.vorb.hamill
 
 import java.nio.file.FileVisitResult
-
 import scala.language.implicitConversions
+import com.typesafe.config.Config
 
 /**
- * Configuration object.
+ * Configuration.
  */
-trait Configuration {
-  def hidden: Boolean
-  def recursive: Boolean
-  def files: Boolean
-  def directories: Boolean
-  def maxDepth: Int
-  def followLinks: Boolean
-  def fileErrorBehavior: Configuration.FileErrorBehavior
-  def directoryErrorBehavior: Configuration.DirectoryErrorBehavior
+class Configuration(config: Config) {
+  import Configuration._
+  private val hc = config.getConfig("hamill")
+
+  val hidden = hc.getBoolean("hidden")
+  val recursive = hc.getBoolean("recursive")
+  val files = hc.getBoolean("files")
+  val directories = hc.getBoolean("directories")
+  val maxDepth = hc.getInt("maxDepth")
+  val followLinks = hc.getBoolean("followLinks")
+
+  val fileErrorBehavior: FileErrorBehavior =
+    fileErrorBehaviors(hc.getString("fileErrorBehavior"))
+  val directoryErrorBehavior: DirectoryErrorBehavior =
+    directoryErrorBehaviors(hc.getString("directoryErrorBehavior"))
 }
 
 object Configuration {
+  lazy val fileErrorBehaviors = Map(
+    "terminate" -> Terminate,
+    "skipSiblings" -> SkipSiblings,
+    "continue" -> Continue
+  )
 
-  /**
-   * Example Configuration.
-   */
-  object Default extends Configuration {
-    def hidden = false
-    def recursive = true
-    def files = true
-    def directories = true
-    def maxDepth = Int.MaxValue
-    def followLinks = false
-    def fileErrorBehavior = Terminate
-    def directoryErrorBehavior = Terminate
-  }
+  lazy val directoryErrorBehaviors = Map(
+    "terminate" -> Terminate,
+    "skipSubtree" -> SkipSubtree
+  )
+
+  trait ErrorBehavior
 
   /**
    * Specifies the behavior on file errors.
    */
-  sealed trait FileErrorBehavior
+  sealed trait FileErrorBehavior extends ErrorBehavior
 
   /**
    * Specifies the behavior on directory errors.
    */
-  sealed trait DirectoryErrorBehavior
+  sealed trait DirectoryErrorBehavior extends ErrorBehavior
 
   /**
    * Terminates the tracer.

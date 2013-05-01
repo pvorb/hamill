@@ -2,9 +2,9 @@ name := "hamill"
 
 organization := "de.vorb"
 
-version := "0.1.0"
+version := "0.2.0"
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.10.1"
 
 
 homepage := Some(url("https://github.com/pvorb/hamill"))
@@ -17,9 +17,13 @@ mainClass := None
 // Dependencies
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 
-libraryDependencies += "org.scala-lang" % "scala-actors" % "2.10.0"
+libraryDependencies += "org.scala-lang" % "scala-actors" % "2.10.1"
 
-libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.1.0"
+libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.1.2"
+
+
+// Eclipse
+EclipseKeys.createSrc := EclipseCreateSrc.Default + EclipseCreateSrc.Resource
 
 
 // Publishing information

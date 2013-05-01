@@ -1,16 +1,15 @@
 package de.vorb.hamill
 
-import akka.actor.ActorSystem
 import java.nio.file.FileSystems
-import akka.actor.Props
-import akka.actor.Actor
-import akka.pattern.ask
-import akka.routing.SmallestMailboxRouter
-import scala.concurrent.duration._
-import akka.actor.PoisonPill
-import scala.concurrent.Await
-import akka.util.Timeout
 import java.nio.file.attribute.BasicFileAttributes
+
+import scala.concurrent.Await
+import scala.concurrent.duration.DurationInt
+import scala.language.implicitConversions
+import scala.language.postfixOps
+
+import akka.actor.ActorSystem
+import akka.util.Timeout
 
 object ActionExample extends App {
   implicit val system = ActorSystem("Filewalker")
@@ -21,8 +20,10 @@ object ActionExample extends App {
       a.lastModifiedTime + ")"
 
   val root = FileSystems.getDefault().getPath("src", "")
+  
+  val tracing = new Tracing
 
-  val future = Tracing.walkFileTree(root,
+  val future = tracing.walkFileTree(root,
     (path: PathContainer) => {
       path match {
         case File(f, Left(err)) =>
@@ -32,7 +33,7 @@ object ActionExample extends App {
         case Directory(d, attrs) =>
           println(d + ", " + toString(attrs))
       }
-    }, Configuration.Default, timeout)
+    }, timeout)
 
   val result = Await.result(future, 5 minutes)
   result match {
