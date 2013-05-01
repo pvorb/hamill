@@ -10,9 +10,7 @@ If you are using SBT, you can add the package by adding the following lines to
 your `build.sbt` file.
 
 ~~~
-resolvers += "Vorb.de repository" at "http://repo.vorb.de/releases/"
-
-libraryDependencies += "de.vorb" %% "hamill" % "0.0.0"
+libraryDependencies += "de.vorb" %% "hamill" % "0.1.0"
 ~~~
 
 Usage Example
