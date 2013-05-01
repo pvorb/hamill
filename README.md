@@ -9,8 +9,8 @@ Download
 If you are using SBT, you can add the package by adding the following lines to
 your `build.sbt` file.
 
-~~~
-libraryDependencies += "de.vorb" %% "hamill" % "0.1.0"
+~~~ scala
+libraryDependencies += "de.vorb" %% "hamill" % "0.2.0"
 ~~~
 
 Usage Example
