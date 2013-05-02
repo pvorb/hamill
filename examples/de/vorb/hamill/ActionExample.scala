@@ -12,9 +12,6 @@ import akka.actor.ActorSystem
 import akka.util.Timeout
 
 object ActionExample extends App {
-  implicit val system = ActorSystem("Filewalker")
-
-  implicit val timeout = Timeout(5 seconds)
   implicit def toString(a: BasicFileAttributes): String =
     "(" + (if (a.isDirectory()) "Directory" else "File") + ", " +
       a.lastModifiedTime + ")"
@@ -33,7 +30,7 @@ object ActionExample extends App {
         case Directory(d, attrs) =>
           println(d + ", " + toString(attrs))
       }
-    }, timeout)
+    })
 
   val result = Await.result(future, 5 minutes)
   result match {
@@ -41,5 +38,5 @@ object ActionExample extends App {
     case Tracer.Result(Some(a)) => println("error: " + a)
   }
 
-  system.shutdown
+  tracing.system.shutdown
 }

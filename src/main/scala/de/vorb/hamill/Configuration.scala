@@ -3,6 +3,8 @@ package de.vorb.hamill
 import java.nio.file.FileVisitResult
 import scala.language.implicitConversions
 import com.typesafe.config.Config
+import akka.util.Timeout
+import scala.concurrent.duration.Duration
 
 /**
  * Configuration.
@@ -22,6 +24,8 @@ class Configuration(config: Config) {
     fileErrorBehaviors(hc.getString("fileErrorBehavior"))
   val directoryErrorBehavior: DirectoryErrorBehavior =
     directoryErrorBehaviors(hc.getString("directoryErrorBehavior"))
+
+  val timeout = Timeout(Duration.fromNanos(hc.getNanoseconds("timeout")))
 }
 
 object Configuration {

@@ -10,7 +10,7 @@ If you are using SBT, you can add the package by adding the following lines to
 your `build.sbt` file.
 
 ~~~ scala
-libraryDependencies += "de.vorb" %% "hamill" % "0.2.0"
+libraryDependencies += "de.vorb" %% "hamill" % "0.3.0"
 ~~~
 
 Usage Example
@@ -29,9 +29,6 @@ import scala.concurrent.duration._
 import scala.concurrent.Await
 
 object Example extends App {
-  implicit val system = ActorSystem("filewalker")
-  implicit val timeout = Timeout(5 seconds)
-
   val root = FileSystems.getDefault().getPath("src", "")
 
   val tracing = new Tracing
@@ -45,9 +42,11 @@ object Example extends App {
       case Directory(d, attrs) =>
         println(d + ", " + attrs)
     }
-  }, timeout)
+  })
 
   Await.result(future, 5 minutes)
+
+  tracing.system.shutdown()
 }
 ~~~
 
