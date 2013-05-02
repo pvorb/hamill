@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Configuration - de.vorb.hamill.Configuration</title>
-          <meta name="description" content="Configuration - de.vorb.hamill.Configuration" />
-          <meta name="keywords" content="Configuration de.vorb.hamill.Configuration" />
+          <title>Tracer - de.vorb.hamill.Tracer</title>
+          <meta name="description" content="Tracer - de.vorb.hamill.Tracer" />
+          <meta name="keywords" content="Tracer de.vorb.hamill.Tracer" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -17,7 +17,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../index.html';
-            var hash = 'de.vorb.hamill.Configuration';
+            var hash = 'de.vorb.hamill.Tracer$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -27,25 +27,24 @@
    	  </script>
     
         </head>
-        <body class="type">
+        <body class="value">
       <div id="definition">
-        <a href="Configuration$.html" title="Go to companion"><img src="../../../lib/class_to_object_big.png" /></a>
+        <a href="Tracer.html" title="Go to companion"><img src="../../../lib/object_to_class_big.png" /></a>
         <p id="owner"><a href="../../package.html" class="extype" name="de">de</a>.<a href="../package.html" class="extype" name="de.vorb">vorb</a>.<a href="package.html" class="extype" name="de.vorb.hamill">hamill</a></p>
-        <h1><a href="Configuration$.html" title="Go to companion">Configuration</a></h1>
+        <h1><a href="Tracer.html" title="Go to companion">Tracer</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">class</span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">Configuration</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">Tracer</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Configuration.
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -65,7 +64,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="de.vorb.hamill.Configuration"><span>Configuration</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="de.vorb.hamill.Tracer"><span>Tracer</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -83,25 +82,64 @@
 
       <div id="template">
         <div id="allMembers">
-        <div id="constructors" class="members">
-              <h3>Instance Constructors</h3>
-              <ol><li name="de.vorb.hamill.Configuration#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(config:com.typesafe.config.Config):de.vorb.hamill.Configuration"></a>
-      <a id="&lt;init&gt;:Configuration"></a>
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="de.vorb.hamill.Tracer.Result" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ResultextendsProductwithSerializable"></a>
+      <a id="Result:Result"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">new</span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">Configuration</span><span class="params">(<span name="config">config: <span class="extype" name="com.typesafe.config.Config">Config</span></span>)</span>
+        <a href="Tracer$$Result.html"><span class="name">Result</span></a><span class="params">(<span name="error">error: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.io.IOException">IOException</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="de.vorb.hamill.Tracer.Start" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="StartextendsAnyRef"></a>
+      <a id="Start:Start"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Tracer$$Start.html"><span class="name">Start</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="de.vorb.hamill.Tracer.StartAction" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StartActionextendsTracer.StartwithProductwithSerializable"></a>
+      <a id="StartAction:StartAction"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Tracer$$StartAction.html"><span class="name">StartAction</span></a><span class="params">(<span name="root">root: <span class="extype" name="java.nio.file.Path">Path</span></span>, <span name="config">config: <a href="Configuration.html" class="extype" name="de.vorb.hamill.Configuration">Configuration</a></span>, <span name="action">action: (<a href="PathContainer.html" class="extype" name="de.vorb.hamill.PathContainer">PathContainer</a>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result"> extends <a href="Tracer$$Start.html" class="extype" name="de.vorb.hamill.Tracer.Start">Start</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="de.vorb.hamill.Tracer.StartListener" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StartListenerextendsTracer.StartwithProductwithSerializable"></a>
+      <a id="StartListener:StartListener"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Tracer$$StartListener.html"><span class="name">StartListener</span></a><span class="params">(<span name="root">root: <span class="extype" name="java.nio.file.Path">Path</span></span>, <span name="config">config: <a href="Configuration.html" class="extype" name="de.vorb.hamill.Configuration">Configuration</a></span>, <span name="listener">listener: <span class="extype" name="akka.actor.ActorRef">ActorRef</span></span>)</span><span class="result"> extends <a href="Tracer$$Start.html" class="extype" name="de.vorb.hamill.Tracer.Start">Start</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
     </li></ol>
             </div>
-
-        
 
         
 
@@ -201,32 +239,6 @@
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="de.vorb.hamill.Configuration#directories" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="directories:Boolean"></a>
-      <a id="directories:Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">directories</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      
-    </li><li name="de.vorb.hamill.Configuration#directoryErrorBehavior" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="directoryErrorBehavior:de.vorb.hamill.Configuration.DirectoryErrorBehavior"></a>
-      <a id="directoryErrorBehavior:DirectoryErrorBehavior"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">directoryErrorBehavior</span><span class="result">: <a href="Configuration$$DirectoryErrorBehavior.html" class="extype" name="de.vorb.hamill.Configuration.DirectoryErrorBehavior">DirectoryErrorBehavior</a></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -253,32 +265,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="de.vorb.hamill.Configuration#fileErrorBehavior" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="fileErrorBehavior:de.vorb.hamill.Configuration.FileErrorBehavior"></a>
-      <a id="fileErrorBehavior:FileErrorBehavior"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">fileErrorBehavior</span><span class="result">: <a href="Configuration$$FileErrorBehavior.html" class="extype" name="de.vorb.hamill.Configuration.FileErrorBehavior">FileErrorBehavior</a></span>
-      </span>
-      </h4>
-      
-    </li><li name="de.vorb.hamill.Configuration#files" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="files:Boolean"></a>
-      <a id="files:Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">files</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -295,19 +281,6 @@
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="de.vorb.hamill.Configuration#followLinks" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="followLinks:Boolean"></a>
-      <a id="followLinks:Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">followLinks</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -334,19 +307,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="de.vorb.hamill.Configuration#hidden" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="hidden:Boolean"></a>
-      <a id="hidden:Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hidden</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -360,19 +320,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="de.vorb.hamill.Configuration#maxDepth" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="maxDepth:Int"></a>
-      <a id="maxDepth:Int"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">maxDepth</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -412,19 +359,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="de.vorb.hamill.Configuration#recursive" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="recursive:Boolean"></a>
-      <a id="recursive:Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">recursive</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -438,19 +372,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="de.vorb.hamill.Configuration#timeout" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="timeout:akka.util.Timeout"></a>
-      <a id="timeout:Timeout"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">timeout</span><span class="result">: <span class="extype" name="akka.util.Timeout">Timeout</span></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
